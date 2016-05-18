@@ -1,3 +1,3 @@
-class Frame do
+class Frame 
 
 end
