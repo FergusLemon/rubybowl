@@ -1,0 +1,3 @@
+class Frame do
+
+end
