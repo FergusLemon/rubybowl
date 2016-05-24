@@ -16,6 +16,12 @@ describe Frame do
       frame.record_frame_score(2)
       expect(frame.history).to match_array([2])
     end
+
+    it 'records a maximum of 2 scores' do
+      3.times do frame.record_frame_score(4)
+      end
+      expect(frame.history).to match_array([4])
+    end
   end
   end
 
