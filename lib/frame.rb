@@ -9,6 +9,11 @@ class Frame
   end
 
   def record_frame_score(number)
-    history << number
+    if history.length == 2
+      history.clear
+      history << number
+    else
+      history << number
+    end
   end
 end
