@@ -25,7 +25,7 @@ describe Frame do
 
     it 'records a strike on the first bowl' do
       frame.record_frame_score(10)
-      expect(frame.history).to match_array([10, 0])
+      expect(frame.history).to match_array([])
     end
   end
   end
