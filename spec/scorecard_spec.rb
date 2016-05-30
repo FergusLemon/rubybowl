@@ -8,4 +8,11 @@ describe Scorecard do
       expect(scorecard.history).to eq([[2, 7]])
     end
   end
+
+  describe '#calculate_current_score' do
+    it 'calculates the current score' do
+      3.times do scorecard.record_frame([2, 7]) end
+      expect(scorecard.calculate_current_score).to eq(27)
+    end
+  end
 end

@@ -9,4 +9,8 @@ class Scorecard
   def record_frame (container)
     history << container
   end
+
+  def calculate_current_score
+    history.flatten.reduce(0, :+)
+  end
 end
