@@ -1,7 +1,7 @@
 require 'player'
 describe Player do
 
-  subject(:player) { described_class.new }
+  subject(:player) { described_class.new(frame)}
   let(:frame) { double :frame }
 
   describe "#bowl" do
