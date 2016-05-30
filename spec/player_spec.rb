@@ -6,6 +6,7 @@ describe Player do
 
   describe "#bowl" do
     it 'returns a number between 0 and 10' do
+      allow(frame).to receive(:remaining_pins).and_return(Frame::MAX_PINS)
       expect(player.bowl).to be_between(0, Frame::MAX_PINS).inclusive
     end
 
