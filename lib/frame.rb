@@ -12,7 +12,7 @@ class Frame
     if history.length == 2
       history.clear
       history << number
-    elsif history.length == 0 && number == 10
+    elsif history.length == 0 && number == MAX_PINS
       history << number
       history.clear
     else
