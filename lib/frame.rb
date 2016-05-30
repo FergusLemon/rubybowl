@@ -15,7 +15,7 @@ class Frame
       history.clear
       set_pins
     elsif history.length == 0 && number == MAX_PINS
-      history << number
+      history.insert(0, number, 0)
       history.clear
     else
       history << number
