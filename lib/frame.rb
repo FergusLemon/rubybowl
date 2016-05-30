@@ -19,7 +19,7 @@ class Frame
       history.clear
     else
       history << number
-      @remaining_pins -= number
+      update_pins(number)
     end
   end
 
@@ -27,5 +27,9 @@ class Frame
 
   def set_pins
     @remaining_pins = MAX_PINS
+  end
+
+  def update_pins(number)
+    @remaining_pins -= number
   end
 end
