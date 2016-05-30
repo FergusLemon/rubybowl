@@ -10,11 +10,10 @@ class Frame
   end
 
   def record_frame_score(number)
-    if history.length == 2
-      history.clear
-      remaining_pins == MAX_PINS
+    if history.length == 1
       history << number
-      @remaining_pins -= number
+      history.clear
+      set_pins
     elsif history.length == 0 && number == MAX_PINS
       history << number
       history.clear
@@ -22,5 +21,11 @@ class Frame
       history << number
       @remaining_pins -= number
     end
+  end
+
+  private
+
+  def set_pins
+    @remaining_pins = MAX_PINS
   end
 end
