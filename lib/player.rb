@@ -8,6 +8,8 @@ class Player
   end
 
   def bowl
-    rand(frame.remaining_pins + 1)
+    number = rand(frame.remaining_pins + 1)
+    frame.record_frame_score(number)
+    number
   end
 end
