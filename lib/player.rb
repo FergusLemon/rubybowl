@@ -1,11 +1,10 @@
 require_relative 'frame'
 class Player
 
-  attr_reader :frame, :scorecard
+  attr_reader :frame
 
-  def initialize (frame_klass = Frame.new, scorecard_klass = Scorecard.new)
+  def initialize (frame_klass = Frame.new)
     @frame = frame_klass
-    @scorecard = scorecard_klass
   end
 
   def bowl
@@ -14,7 +13,7 @@ class Player
     number
   end
 
-  def get_score
-    @scorecard.calculate_current_score
+  def get_score (scorecards)
+    scorecards.each { |scorecard| scorecard.calculate_score }
   end
 end
