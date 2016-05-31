@@ -18,4 +18,11 @@ describe Player do
       expect(player.bowl).to be_between(0, frame.remaining_pins).inclusive
     end
   end
+
+  describe '#get_score' do
+    it 'returns the player\'s current score' do
+      allow(frame).to receive(:calculate_current_score).and_return(84)
+      expect(player.get_score).to eq(84)
+    end
+  end
 end
