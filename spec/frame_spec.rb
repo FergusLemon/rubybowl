@@ -31,10 +31,10 @@ describe Frame do
   end
   end
 
-  describe '#calculate_current_score' do
+  describe '#calculate_score' do
     it 'returns the current score' do
-      allow(:scorecard).to receive(:calculate_current_score) { 20 }
-      expect(frame.calculate_current_score).to eq(20)
+      allow(:scorecard).to receive(:calculate_score) { 20 }
+      expect(frame.calculate_score).to eq(20)
     end
   end
 
