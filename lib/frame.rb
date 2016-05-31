@@ -2,11 +2,12 @@ class Frame
 
   MAX_PINS = 10
 
-  attr_reader :history, :remaining_pins
+  attr_reader :history, :remaining_pins, :scorecard
 
-  def initialize
+  def initialize (scorecard_klass)
     @history = []
     @remaining_pins = MAX_PINS
+    @scorecard = scorecard_klass || Scorecard.new
   end
 
   def record_frame_score(number)
