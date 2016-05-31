@@ -24,9 +24,9 @@ class Frame
     end
   end
 
-  def calculate_score(scorecard)
-    scorecard.calculate_score
-  end
+#  def calculate_score(scorecard)
+#    scorecard.calculate_score
+ # end
 
   private
 

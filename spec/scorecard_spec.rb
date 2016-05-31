@@ -9,10 +9,10 @@ describe Scorecard do
     end
   end
 
-  describe '#calculate_current_score' do
+  describe '#calculate_score' do
     it 'calculates the current score' do
       3.times do scorecard.record_frame([2, 7]) end
-      expect(scorecard.calculate_current_score).to eq(27)
+      expect(scorecard.calculate_score).to eq(27)
     end
   end
 end

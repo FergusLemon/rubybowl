@@ -1,7 +1,7 @@
 require 'player'
 describe Player do
 
-  subject(:player) { described_class.new(frame)}
+  subject(:player) { described_class.new(frame) }
   let(:frame) { double :frame }
 
   describe "#bowl" do
@@ -21,8 +21,8 @@ describe Player do
 
   describe '#get_score' do
     it 'returns the player\'s current score' do
-      allow(frame).to receive(:calculate_score).and_return(84)
-      expect(player.get_score(frame.scoreboard)).to eq(84)
+      allow(scorecard).to receive(:history).and_return([[8, 4]])
+      expect(player.get_score(scorecard)).to eq(12)
     end
   end
 end

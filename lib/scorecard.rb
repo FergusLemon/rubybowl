@@ -10,7 +10,7 @@ class Scorecard
     history << container
   end
 
-  def calculate_current_score
+  def calculate_score
     history.flatten.reduce(0, :+)
   end
 end
