@@ -1,7 +1,8 @@
 require 'frame'
 describe Frame do
 
-  subject(:frame) { described_class.new }
+  subject(:frame) { described_class.new(scorecard) }
+  let(:scorecard) { double :scorecard }
 
   describe 'Frame::MAX_PINS' do
     it 'has a maximum of 10 pins' do
@@ -28,6 +29,13 @@ describe Frame do
       expect(frame.history).to match_array([])
     end
   end
+  end
+
+  describe '#calculate_current_score' do
+    it 'returns the current score' do
+      allow(:scorecard).to receive(:calculate_current_score) { 20 }
+      expect(frame.calculate_current_score).to eq(20)
+    end
   end
 
 end
