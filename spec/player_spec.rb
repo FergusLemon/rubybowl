@@ -21,8 +21,8 @@ describe Player do
 
   describe '#get_score' do
     it 'returns the player\'s current score' do
-      allow(frame).to receive(:calculate_current_score).and_return(84)
-      expect(player.get_score).to eq(84)
+      allow(frame).to receive(:calculate_score).and_return(84)
+      expect(player.get_score(frame.scoreboard)).to eq(84)
     end
   end
 end
