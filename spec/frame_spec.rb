@@ -1,7 +1,7 @@
 require 'frame'
 describe Frame do
 
-  subject(:frame) { described_class.new }
+  subject(:frame) { described_class.new(scorecard)}
   let(:scorecard) { double :scorecard }
 
   describe 'Frame::MAX_PINS' do
