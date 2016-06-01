@@ -1,7 +1,7 @@
 require 'frame'
 describe Frame do
 
-  subject(:frame) { described_class.new(scorecard) }
+  subject(:frame) { described_class.new }
   let(:scorecard) { double :scorecard }
 
   describe 'Frame::MAX_PINS' do
@@ -12,30 +12,32 @@ describe Frame do
 
   describe '#record_frame_score' do
 
-  context 'frames 1 to 9' do
-    it 'records a score' do
-      frame.record_frame_score(2)
-      expect(frame.history).to match_array([2])
-    end
-
-    it 'records a maximum of 2 scores' do
-      3.times do frame.record_frame_score(4)
+    context 'frames 1 to 9' do
+      it 'records a score' do
+        frame.record_frame_score(2)
+        expect(frame.history).to match_array([2])
       end
-      expect(frame.history).to match_array([4])
-    end
 
-    it 'records a strike on the first bowl' do
-      frame.record_frame_score(10)
-      expect(frame.history).to match_array([])
-    end
-  end
-  end
+      it 'records a maximum of 2 scores' do
+        3.times do frame.record_frame_score(4) end
+        expect(frame.history).to match_array([4])
+      end
 
-  describe '#calculate_score' do
-    xit 'returns the current score' do
-      allow(scorecard).to receive(:calculate_score).with([20]).and_return(20)
-      expect(frame.calculate_score(frame.scorecard)).to eq(20)
+      it 'records a strike on the first bowl' do
+        frame.record_frame_score(10)
+        expect(frame.history).to match_array([])
+      end
     end
   end
 
+  describe '#push_to_scorecard' do
+    before(:each) do
+      2.times do frame.record_frame_score(4) end
+    end
+    context 'once the frame is finished' do
+      it 'records the total frame score in a scorecard' do
+        expect(frame.push_to_scorecard).to have_been_called
+      end
+    end
+  end
 end
