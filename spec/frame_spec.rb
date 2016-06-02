@@ -12,6 +12,9 @@ describe Frame do
 
   describe '#record_frame_score' do
 
+    before(:each) do
+      allow(scorecard).to receive(:record_frame)
+    end
     context 'frames 1 to 9' do
       it 'records a score' do
         frame.record_frame_score(2)
