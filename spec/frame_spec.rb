@@ -1,7 +1,7 @@
 require 'frame'
 describe Frame do
 
-  subject(:frame) { described_class.new(scorecard)}
+  subject(:frame) { described_class.new(scorecard) }
   let(:scorecard) { double :scorecard }
 
   describe 'Frame::MAX_PINS' do
@@ -31,16 +31,21 @@ describe Frame do
         expect(frame.history).to match_array([])
       end
     end
-  end
 
-  describe '#push_to_scorecard' do
-    before(:each) do
-      2.times do frame.record_frame_score(4) end
-    end
-    context 'once the frame is finished' do
-      it 'records the total frame score in a scorecard' do
-        expect(frame.push_to_scorecard).to have_been_called
+    context 'frame is finished' do
+      before(:each) do
+        2.times do frame.record_frame_score(2) end
+        allow(scorecard).to receive(:history).and_return([[2, 2]])
+      end
+
+      it 'resets pins back to MAX_PINS' do
+        expect(frame.remaining_pins).to eq(Frame::MAX_PINS)
+      end
+
+      it 'stores the score in a scorecard' do
+        expect(frame.scorecard.history).to eq([[2, 2]])
       end
     end
   end
+
 end
