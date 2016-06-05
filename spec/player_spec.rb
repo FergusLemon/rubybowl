@@ -3,6 +3,7 @@ describe Player do
 
   subject(:player) { described_class.new(frame) }
   let(:frame) { double :frame }
+  let(:scorecard) { double :scorecard }
 
   describe "#bowl" do
     it 'returns a number between 0 and 10' do
@@ -21,7 +22,7 @@ describe Player do
 
   describe '#get_score' do
     it 'returns the player\'s current score' do
-      allow(scorecard).to receive(:history).and_return([[8, 4]])
+      allow(scorecard).to receive(:calculate_score).and_return(12)
       expect(player.get_score(scorecard)).to eq(12)
     end
   end
