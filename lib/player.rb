@@ -4,7 +4,7 @@ class Player
   attr_reader :frame
 
   def initialize (frame)
-    @frame = frame || Frame.new
+    @frame = frame
   end
 
   def bowl
