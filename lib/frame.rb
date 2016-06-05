@@ -14,12 +14,11 @@ class Frame
     if history.length == 1
       history << number
       push_to_scorecard(history, scorecard)
-      history.clear
-      set_pins
+      reset_frame
     elsif history.length == 0 && number == MAX_PINS
       history.insert(0, number, 0)
       push_to_scorecard(history, scorecard)
-      history.clear
+      reset_frame
     else
       history << number
       update_pins(number)
@@ -39,5 +38,10 @@ class Frame
 
   def push_to_scorecard(frame_score, scorecard)
     scorecard.record_frame(frame_score)
+  end
+
+  def reset_frame
+    @history = []
+    set_pins
   end
 end
