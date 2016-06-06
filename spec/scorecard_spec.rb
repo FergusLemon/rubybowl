@@ -15,4 +15,20 @@ describe Scorecard do
       expect(scorecard.calculate_score).to eq(27)
     end
   end
+
+  describe '#is_spare?' do
+    it 'knows what a spare is' do
+      expect(scorecard.is_spare?([5, 5])).to be true
+    end
+
+    it 'knows a strike is not a spare' do
+      expect(scorecard.is_spare?([10, 0])).to be false
+    end
+  end
+
+  describe '#is_strike?' do
+    it 'knows what a strike is' do
+      expect(scorecard.is_strike?([10, 0])).to be true
+    end
+  end
 end
