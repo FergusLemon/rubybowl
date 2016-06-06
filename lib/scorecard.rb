@@ -21,4 +21,8 @@ class Scorecard
   def is_strike? (frame_score)
     frame_score[0] == 10
   end
+
+  def calculate_bonus
+
+  end
 end
