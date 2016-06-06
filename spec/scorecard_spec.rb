@@ -31,4 +31,14 @@ describe Scorecard do
       expect(scorecard.is_strike?([10, 0])).to be true
     end
   end
+
+  describe '#calculate_bonus' do
+    context 'for a spare' do
+      it 'adds the following score from the next bowl' do
+        scorecard.record_frame([5, 5])
+        scorecard.record_frame([2, 7])
+        expect(scorecard.calculate_bonus).to eq(2)
+      end
+    end
+  end
 end
