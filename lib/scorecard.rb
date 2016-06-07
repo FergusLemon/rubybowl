@@ -4,6 +4,7 @@ class Scorecard
 
   def initialize
     @history = []
+    @bonus_history = []
   end
 
   def record_frame (container)
