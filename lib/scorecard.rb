@@ -8,7 +8,14 @@ class Scorecard
   end
 
   def record_frame (container)
-    history << container
+    if self.is_strike?(container)
+      @bonus_history << container && history << container
+    elsif
+      self.is_spare?(container)
+      @bonus_history << container[0] && history << container
+    else
+      history << container
+    end
   end
 
   def calculate_score
@@ -24,6 +31,6 @@ class Scorecard
   end
 
   def calculate_bonus
-
+    @bonus_history.flatten.reduce(0, :+)
   end
 end
