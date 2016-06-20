@@ -5,14 +5,23 @@ describe Scorecard do
   describe '#record_frame' do
     it 'records a frame' do
       scorecard.record_frame([2, 7])
-      expect(scorecard.history).to eq([[2, 7]])
+      expect(scorecard.history).to eq([[0, 0], [2, 7]])
     end
   end
 
   describe '#calculate_score' do
-    it 'calculates the current score' do
-      3.times do scorecard.record_frame([2, 7]) end
-      expect(scorecard.calculate_score).to eq(27)
+    context 'no bonus score' do
+      it 'calculates the current score' do
+        3.times do scorecard.record_frame([2, 7]) end
+        expect(scorecard.calculate_score).to eq(27)
+      end
+    end
+    context 'includes a spare' do
+      it 'adds on the score of the first ball in the next frame' do
+        scorecard.record_frame([5, 5])
+        scorecard.record_frame([2, 7])
+        expect(scorecard.calculate_score).to eq(21)
+      end
     end
   end
 
