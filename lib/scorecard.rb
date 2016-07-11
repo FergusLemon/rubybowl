@@ -1,10 +1,10 @@
 class Scorecard
 
-  attr_reader :history
+  attr_reader :history, :bonus_history
 
   def initialize
     @history = [[0, 0]]
-    @bonus_history = []
+    @bonus_history = [0]
   end
 
   def record_frame (container)
@@ -19,7 +19,9 @@ class Scorecard
   end
 
   def calculate_score
-    history.flatten.reduce(0, :+)
+    score = history.flatten.reduce(0, :+)
+    bonus = bonus_history.last
+    score + bonus
   end
 
   def is_spare? (frame_score)
