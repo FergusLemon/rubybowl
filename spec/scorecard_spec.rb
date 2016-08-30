@@ -3,6 +3,7 @@ describe Scorecard do
   subject(:scorecard) { described_class.new }
   let(:normal_frame) { [2, 7] }
   let(:spare) { [5, 5] }
+  let(:strike) { [10, 0] }
 
   describe '#record_frame' do
     it 'records a frame' do
@@ -27,7 +28,7 @@ describe Scorecard do
     end
     context 'includes a strike' do
       it 'adds on the score of the first and second ball in the next frame' do
-        scorecard.record_frame([10, 0])
+        scorecard.record_frame(strike)
         scorecard.record_frame(normal_frame)
         expect(scorecard.calculate_score).to eq(28)
       end
@@ -40,13 +41,13 @@ describe Scorecard do
     end
 
     it 'knows a strike is not a spare' do
-      expect(scorecard.is_spare?([10, 0])).to be false
+      expect(scorecard.is_spare?(strike)).to be false
     end
   end
 
   describe '#is_strike?' do
     it 'knows what a strike is' do
-      expect(scorecard.is_strike?([10, 0])).to be true
+      expect(scorecard.is_strike?(strike)).to be true
     end
   end
 
