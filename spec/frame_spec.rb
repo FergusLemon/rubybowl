@@ -3,10 +3,11 @@ describe Frame do
 
   subject(:frame) { described_class.new(scorecard) }
   let(:scorecard) { double :scorecard }
+  let(:strike) { 10 }
 
   describe 'Frame::MAX_PINS' do
     it 'has a maximum of 10 pins' do
-      expect(Frame::MAX_PINS).to equal(10)
+      expect(Frame::MAX_PINS).to equal(strike)
     end
   end
 
@@ -27,7 +28,7 @@ describe Frame do
       end
 
       it 'records a strike on the first bowl' do
-        frame.record_frame_score(10)
+        frame.record_frame_score(strike)
         expect(frame.history).to match_array([])
       end
     end
