@@ -20,7 +20,8 @@ class Scorecard
 
   def calculate_score
     score = history.flatten.reduce(0, :+)
-    bonus = bonus_history.last
+    bonus = bonus_history.flatten.reduce(0, :+)
+    #bonus = bonus_history.last
     score + bonus
   end
 
