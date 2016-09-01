@@ -2,25 +2,25 @@ class Frame
 
   MAX_PINS = 10
 
-  attr_reader :history, :remaining_pins, :scorecard
+  attr_reader :frame_history, :remaining_pins, :scorecard
 
   def initialize (scorecard)
-    @history = []
+    @frame_history = []
     @remaining_pins = MAX_PINS
     @scorecard = scorecard
   end
 
   def record_frame_score(number)
-    if history.length == 1
-      history << number
-      push_to_scorecard(history, scorecard)
+    if frame_history.length == 1
+      frame_history << number
+      push_to_scorecard(frame_history, scorecard)
       reset_frame
-    elsif history.length == 0 && number == MAX_PINS
-      history.insert(0, number, 0)
-      push_to_scorecard(history, scorecard)
+    elsif frame_history.length == 0 && number == MAX_PINS
+      frame_history.insert(0, number, 0)
+      push_to_scorecard(frame_history, scorecard)
       reset_frame
     else
-      history << number
+      frame_history << number
       update_pins(number)
     end
   end
@@ -41,7 +41,7 @@ class Frame
   end
 
   def reset_frame
-    @history = []
+    @frame_history = []
     set_pins
   end
 end
