@@ -28,8 +28,11 @@ describe Scorecard do
     end
     context 'includes a strike' do
       it 'adds on the score of the first and second ball in the next frame' do
+        p scorecard
         scorecard.record_frame(strike)
+        p scorecard
         scorecard.record_frame(normal_frame)
+        p scorecard
         expect(scorecard.calculate_score).to eq(28)
       end
     end
