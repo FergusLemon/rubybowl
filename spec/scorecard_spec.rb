@@ -4,11 +4,12 @@ describe Scorecard do
   let(:normal_frame) { [2, 7] }
   let(:spare) { [5, 5] }
   let(:strike) { [10, 0] }
+  let(:gutter_ball) { [0, 0] }
 
   describe '#record_frame' do
     it 'records a frame' do
       scorecard.record_frame(normal_frame)
-      expect(scorecard.history).to eq([[0, 0], normal_frame])
+      expect(scorecard.history).to eq([gutter_ball, normal_frame])
     end
   end
 
@@ -34,6 +35,12 @@ describe Scorecard do
         scorecard.record_frame(normal_frame)
         p scorecard
         expect(scorecard.calculate_score).to eq(28)
+      end
+    end
+    context 'perfect game' do
+      it 'correctly calculates the score for a perfect game' do
+        10.times do scorecard.record_frame(strike) end
+        expect(scorecard.calculate_score).to eq(300)
       end
     end
   end
