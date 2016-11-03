@@ -24,7 +24,7 @@ class Scorecard
   end
 
   def calculate_bonus (history)
-    b = history.each_with_index.map { |frame, i| if frame == STRIKE && history[i + 1] != STRIKE
+    bonus = history.each_with_index.map { |frame, i| if frame == STRIKE && history[i + 1] != STRIKE
         history[i + 1]
       elsif frame == STRIKE && history[i + 1] == STRIKE
         var = history[i + 1, 2]
@@ -34,6 +34,6 @@ class Scorecard
       else
         0
       end }
-    b.flatten.compact.reduce(&:+)
+    bonus.flatten.compact.reduce(&:+)
   end
 end
