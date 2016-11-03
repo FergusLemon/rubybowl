@@ -66,7 +66,7 @@ describe Scorecard do
       it 'adds the following score from the next bowl' do
         scorecard.record_frame(spare)
         scorecard.record_frame(normal_frame)
-        expect(scorecard.calculate_bonus).to eq(2)
+        expect(scorecard.calculate_bonus(scorecard.history)).to eq(2)
       end
     end
   end

@@ -20,8 +20,7 @@ class Scorecard
 
   def calculate_score
     score = history.flatten.reduce(0, :+)
-    bonus = bonus_history.flatten.reduce(0, :+)
-    #bonus = bonus_history.last
+    bonus = self.calculate_bonus(history)
     score + bonus
   end
 
@@ -33,7 +32,17 @@ class Scorecard
     frame_score == [10, 0]
   end
 
-  def calculate_bonus
-    @bonus_history.flatten.reduce(0, :+)
+  def calculate_bonus (history)
+    b = history.each_with_index.map { |frame, i| if frame == [10, 0] && history[i + 1] != [10, 0]
+        history[i + 1]
+      elsif frame == [10, 0] && history[i + 1] == [10, 0]
+        var = history[i + 1, 2]
+        var.flatten.take(3)
+      elsif frame.reduce(&:+) == 10
+        history[i + 1][0]
+      else
+        0
+      end }
+    b.flatten.reduce(&:+)
   end
 end
