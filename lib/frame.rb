@@ -11,20 +11,27 @@ class Frame
   end
 
   def record_frame_score(number)
-      if frame_history.length == 1
-        frame_history << number
-        push_to_scorecard(frame_history, scorecard)
-        reset_frame
-      elsif frame_history.length == 0 && number == MAX_PINS
-        frame_history.insert(0, number, 0)
-        push_to_scorecard(frame_history, scorecard)
-        reset_frame
-      else
-        frame_history << number
-        update_pins(number)
-      end
+    if frame_history.length == 1
+      frame_history << number
+      push_to_scorecard(frame_history, scorecard)
+      reset_frame
+    elsif frame_history.length == 0 && number == MAX_PINS
+      frame_history.insert(0, number, 0)
+      push_to_scorecard(frame_history, scorecard)
+      reset_frame
+    else
+      frame_history << number
+      update_pins(number)
+    end
   end
 
+  def record_final_frame_score(number)
+
+  end
+
+  def last_frame?(scorecard)
+    scorecard.length == 10
+  end
 
   private
 
@@ -45,7 +52,4 @@ class Frame
     set_pins
   end
 
-  def last_frame?(scorecard)
-    scorecard.length == 10
-  end
 end

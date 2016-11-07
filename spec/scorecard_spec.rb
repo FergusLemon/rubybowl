@@ -7,16 +7,18 @@ describe Scorecard do
   let(:gutter_ball) { [0, 0] }
 
   describe '#record_frame' do
-    context 'no strike in the tenth frame' do
+    context 'during the first nine frames' do
       it 'records a frame' do
         scorecard.record_frame(normal_frame)
         expect(scorecard.history).to eq([gutter_ball, normal_frame])
       end
     end
 
-    context 'strike in the tenth frame' do
-      it 'records 3 scores' do
-
+    context 'during the tenth frame' do
+      it 'records scores normally where there is no strike or spare' do
+        9.times do scorecard.record_frame(normal_frame) end
+        scorecard.record_frame(normal_frame)
+        expect(scorecard.history.last).to eq(normal_frame)
       end
     end
   end
