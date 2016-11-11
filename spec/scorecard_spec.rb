@@ -45,14 +45,13 @@ describe Scorecard do
       end
     end
     context 'perfect game' do
-      xit 'correctly calculates the score for a perfect game' do
+      it 'correctly calculates the score for a perfect game' do
         10.times do scorecard.record_frame(strike) end
         expect(scorecard.calculate_score).to eq(300)
       end
 
       it 'correctly calculates the score for a perfect game' do
         9.times do scorecard.record_frame(strike) end
-        p scorecard
         expect(scorecard.calculate_score).to eq(270)
       end
     end
