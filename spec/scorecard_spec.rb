@@ -75,6 +75,13 @@ describe Scorecard do
         #expect(scorecard.record_frame(normal_frame)).to output('Thank you for playing Ruby Bowl your score was 90.').to_stdout_from_any_process
       end
     end
+
+    context 'spare in the tenth frame' do
+      it 'ends the game after one bonus roll' do
+        11.times do scorecard.record_frame(spare) end
+        expect(scorecard.history.last).to eq(5)
+      end
+    end
   end
   describe '#calculate_bonus' do
     context 'for a spare' do

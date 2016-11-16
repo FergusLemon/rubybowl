@@ -12,10 +12,11 @@ class Scorecard
   def record_frame (frame_score)
     if history.length < 11
       history << frame_score
-    elsif history.length == 11 && (history.last != STRIKE || self.is_spare?(history.last))
+    elsif history.length == 11 && history.last != STRIKE && self.is_spare?(history.last) == false
       self.end_game
     elsif history.length == 11 && self.is_spare?(history.last)
-      history << frame_score[0]
+      history << [frame_score[0], 0]
+      p history
       self.end_game
     else history.length < 13 && history.last == STRIKE
       history << frame_score
@@ -40,6 +41,7 @@ class Scorecard
         var = history[i + 1, 2]
         var.flatten.take(3)
       elsif frame.reduce(&:+) == MAX_SCORE
+        p history
         history[i + 1][0]
       else
         0
