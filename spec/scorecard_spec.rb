@@ -47,11 +47,10 @@ describe Scorecard do
     context 'perfect game' do
       it 'correctly calculates the score for a perfect game' do
         12.times do scorecard.record_frame(strike) end
-        print scorecard.history
         expect(scorecard.calculate_score).to eq(300)
       end
 
-      it 'correctly calculates the score for a perfect game' do
+      it 'correctly calculates the score for 10 consecutive strikes' do
         10.times do scorecard.record_frame(strike) end
         expect(scorecard.calculate_score).to eq(270)
       end
@@ -68,6 +67,15 @@ describe Scorecard do
     end
   end
 
+  describe '#end_game' do
+    context 'no strike or spare in the tenth frame' do
+      it 'ends the game after ten frames' do
+        11.times do scorecard.record_frame(normal_frame) end
+        expect(scorecard.calculate_score).to eq(90)
+        #expect(scorecard.record_frame(normal_frame)).to output('Thank you for playing Ruby Bowl your score was 90.').to_stdout_from_any_process
+      end
+    end
+  end
   describe '#calculate_bonus' do
     context 'for a spare' do
       it 'adds the following score from the next bowl' do

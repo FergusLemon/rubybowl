@@ -10,12 +10,16 @@ class Scorecard
   end
 
   def record_frame (frame_score)
-    if history.length == 11 && history.last != STRIKE || self.is_spare?(history.last)
+    if history.length < 11
       history << frame_score
+    elsif history.length == 11 && (history.last != STRIKE || self.is_spare?(history.last))
+      self.end_game
     elsif history.length == 11 && self.is_spare?(history.last)
-      history << frame_score[1]
+      history << frame_score[0]
+      self.end_game
     else history.length < 13 && history.last == STRIKE
       history << frame_score
+      self.end_game
     end
   end
 
@@ -43,4 +47,7 @@ class Scorecard
     bonus.flatten.compact.reduce(&:+)
   end
 
+  def end_game
+    puts "Thank you for playing Ruby Bowl your score was #{self.calculate_score}."
+  end
 end
