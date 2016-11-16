@@ -10,7 +10,13 @@ class Scorecard
   end
 
   def record_frame (frame_score)
-    history << frame_score
+    if history.length == 11 && history.last != STRIKE || self.is_spare?(history.last)
+      history << frame_score
+    elsif history.length == 11 && self.is_spare?(history.last)
+      history << frame_score[1]
+    else history.length < 13 && history.last == STRIKE
+      history << frame_score
+    end
   end
 
   def calculate_score
@@ -37,9 +43,4 @@ class Scorecard
     bonus.flatten.compact.reduce(&:+)
   end
 
-  private
-
-  def is_tenth_frame? (history)
-    history.length == 10
-  end
 end
