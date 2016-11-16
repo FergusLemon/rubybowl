@@ -79,7 +79,7 @@ describe Scorecard do
     context 'spare in the tenth frame' do
       it 'ends the game after one bonus roll' do
         11.times do scorecard.record_frame(spare) end
-        expect(scorecard.history.last).to eq(5)
+        expect(scorecard.history.last).to eq([5, 0])
       end
     end
   end
