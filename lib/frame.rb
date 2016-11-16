@@ -25,14 +25,6 @@ class Frame
     end
   end
 
-  def record_final_frame_score(number)
-
-  end
-
-  def last_frame?(scorecard)
-    scorecard.length == 10
-  end
-
   private
 
   def set_pins
