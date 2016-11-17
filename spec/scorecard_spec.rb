@@ -83,6 +83,15 @@ describe Scorecard do
       end
     end
   end
+
+  context 'strike in the tenth frame, followed by no strike' do
+    it 'end the game after two bonus rolls' do
+      11.times do scorecard.record_frame(strike) end
+      scorecard.record_frame(normal_frame)
+      expect(scorecard.history.last).to eq(normal_frame)
+    end
+  end
+
   describe '#calculate_bonus' do
     context 'for a spare' do
       it 'adds the following score from the next bowl' do
