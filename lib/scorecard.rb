@@ -16,7 +16,6 @@ class Scorecard
       self.end_game
     elsif history.length == 11 && self.is_spare?(history.last)
       history << [frame_score[0], 0]
-      p history
       self.end_game
     else history.length < 13 && history.last == STRIKE
       history << frame_score
@@ -35,18 +34,18 @@ class Scorecard
   end
 
   def calculate_bonus (history)
-    bonus = history.each_with_index.map { |frame, i| if frame == STRIKE && history[i + 1] != STRIKE
+    bonus = history.each_with_index.map { |frame, i|
+      if frame == STRIKE && history[i + 1] != STRIKE
         history[i + 1]
       elsif frame == STRIKE && history[i + 1] == STRIKE
         var = history[i + 1, 2]
         var.flatten.take(3)
       elsif frame.reduce(&:+) == MAX_SCORE
-        p history
         history[i + 1][0]
       else
         0
-      end }
-    bonus.flatten.compact.reduce(&:+)
+      end}
+    bonus[0, 10].flatten.compact.reduce(&:+)
   end
 
   def end_game
