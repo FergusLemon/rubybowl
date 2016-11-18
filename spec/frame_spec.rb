@@ -11,31 +11,31 @@ describe Frame do
     end
   end
 
-  describe '#record_frame_score' do
+  describe '#recordScore' do
 
     before(:each) do
-      allow(scorecard).to receive(:record_frame)
+      allow(scorecard).to receive(:recordFrame)
     end
     context 'frames 1 to 9' do
       it 'records a score' do
-        frame.record_frame_score(2)
+        frame.recordScore(2)
         expect(frame.frame_history).to match_array([2])
       end
 
       it 'records a maximum of 2 scores' do
-        3.times do frame.record_frame_score(4) end
+        3.times do frame.recordScore(4) end
         expect(frame.frame_history).to match_array([4])
       end
 
       it 'records a strike on the first bowl' do
-        frame.record_frame_score(strike)
+        frame.recordScore(strike)
         expect(frame.frame_history).to match_array([])
       end
     end
 
     context 'frame is finished' do
       before(:each) do
-        2.times do frame.record_frame_score(2) end
+        2.times do frame.recordScore(2) end
         allow(scorecard).to receive(:history).and_return([[2, 2]])
       end
 

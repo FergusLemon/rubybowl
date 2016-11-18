@@ -10,38 +10,38 @@ class Frame
     @scorecard = scorecard
   end
 
-  def record_frame_score(number)
+  def recordScore(number)
     if frame_history.length == 1
       frame_history << number
-      push_to_scorecard(frame_history, scorecard)
-      reset_frame
+      pushToScorecard(frame_history, scorecard)
+      resetFrame
     elsif frame_history.length == 0 && number == MAX_PINS
       frame_history.insert(0, number, 0)
-      push_to_scorecard(frame_history, scorecard)
-      reset_frame
+      pushToScorecard(frame_history, scorecard)
+      resetFrame
     else
       frame_history << number
-      update_pins(number)
+      updatePins(number)
     end
   end
 
   private
 
-  def set_pins
+  def setPins
     @remaining_pins = MAX_PINS
   end
 
-  def update_pins(number)
+  def updatePins(number)
     @remaining_pins -= number
   end
 
-  def push_to_scorecard(frame_score, scorecard)
-    scorecard.record_frame(frame_score)
+  def pushToScorecard(frame_score, scorecard)
+    scorecard.recordFrame(frame_score)
   end
 
-  def reset_frame
+  def resetFrame
     @frame_history = []
-    set_pins
+    setPins
   end
 
 end
