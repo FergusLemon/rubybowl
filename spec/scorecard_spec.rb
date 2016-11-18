@@ -48,8 +48,6 @@ describe Scorecard do
     context 'perfect game' do
       it 'correctly calculates the score for a perfect game' do
         12.times do scorecard.recordFrame(strike) end
-        print scorecard.history
-        print scorecard.calculateBonus(scorecard.history)
         expect(scorecard.calculateScore).to eq(300)
       end
 

@@ -61,6 +61,8 @@ class Scorecard
     end
   end
 
+  private
+
   def frames129
     history.length < 10
   end
