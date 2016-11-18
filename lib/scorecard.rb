@@ -1,25 +1,24 @@
 class Scorecard
 
-  attr_reader :history
+  attr_reader :history, :game_over
 
   STRIKE = [10, 0]
   MAX_SCORE = 10
 
   def initialize
     @history = [[0, 0]]
+    @game_over = false
   end
 
   def record_frame (frame_score)
-    if history.length < 11
+    if frames129
       history << frame_score
-    elsif history.length == 11 && history.last != STRIKE && self.is_spare?(history.last) == false
-      self.end_game
-    elsif history.length == 11 && self.is_spare?(history.last)
+    elsif finalFrameNoSpecial(frame_score) || finalFrameDoubleStrike(frame_score)
+      history << frame_score
+    elsif finalFrameSpare(frame_score)
       history << [frame_score[0], 0]
-      self.end_game
-    else history.length < 13 && history.last == STRIKE
+    else finalFrameStrike(frame_score)
       history << frame_score
-      self.end_game
     end
   end
 
@@ -48,7 +47,35 @@ class Scorecard
     bonus[0, 10].flatten.compact.reduce(&:+)
   end
 
-  def end_game
+  def reset_scorecard
+    @history = [[0, 0]]
+    @game_over = false
+  end
+
+  def display_score
     puts "Thank you for playing Ruby Bowl your score was #{self.calculate_score}."
+    puts "Would you like to play again?"
+    res = gets.chomp
+    res == 'yes' ? reset_scorecard : exit
+  end
+
+  def frames129
+    history.length < 10
+  end
+
+  def finalFrameNoSpecial (frame_score)
+    history.length == 10 && frame_score != STRIKE && !is_spare?(frame_score)
+  end
+
+  def finalFrameSpare (frame_score)
+    history.length == 11 && is_spare?(history.last)
+  end
+
+  def finalFrameStrike (frame_score)
+    history.length == 11 && history.last == STRIKE
+  end
+
+  def finalFrameDoubleStrike (frame_score)
+    history.length == 12 && history.last == STRIKE
   end
 end

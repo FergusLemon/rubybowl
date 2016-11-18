@@ -5,6 +5,7 @@ describe Scorecard do
   let(:spare) { [5, 5] }
   let(:strike) { [10, 0] }
   let(:gutter_ball) { [0, 0] }
+  let(:fresh_scorecard) { [[0, 0]] }
 
   describe '#record_frame' do
     context 'during the first nine frames' do
@@ -47,6 +48,8 @@ describe Scorecard do
     context 'perfect game' do
       it 'correctly calculates the score for a perfect game' do
         12.times do scorecard.record_frame(strike) end
+        print scorecard.history
+        print scorecard.calculate_bonus(scorecard.history)
         expect(scorecard.calculate_score).to eq(300)
       end
 
@@ -70,8 +73,8 @@ describe Scorecard do
   describe '#end_game' do
     context 'no strike or spare in the tenth frame' do
       it 'ends the game after ten frames' do
-        11.times do scorecard.record_frame(normal_frame) end
-        expect(scorecard.calculate_score).to eq(90)
+        10.times do scorecard.record_frame(normal_frame) end
+        expect(scorecard.history).to eq(fresh_scorecard)
         #expect(scorecard.record_frame(normal_frame)).to output('Thank you for playing Ruby Bowl your score was 90.').to_stdout_from_any_process
       end
     end
@@ -79,16 +82,24 @@ describe Scorecard do
     context 'spare in the tenth frame' do
       it 'ends the game after one bonus roll' do
         11.times do scorecard.record_frame(spare) end
-        expect(scorecard.history.last).to eq([5, 0])
+        expect(scorecard.history.length).to eq(1)
       end
     end
-  end
 
-  context 'strike in the tenth frame, followed by no strike' do
-    it 'end the game after two bonus rolls' do
-      11.times do scorecard.record_frame(strike) end
-      scorecard.record_frame(normal_frame)
-      expect(scorecard.history.last).to eq(normal_frame)
+    context 'strike in the tenth frame, followed by no strike' do
+      it 'end the game after two bonus rolls' do
+        10.times do scorecard.record_frame(strike) end
+        scorecard.record_frame(normal_frame)
+        expect(scorecard.history).to eq(fresh_scorecard)
+      end
+    end
+
+    context 'strike in the tenth frame, followed by two strikes' do
+      it 'ends the game after the second strike' do
+        13.times do scorecard.record_frame(strike) end
+        print scorecard.history
+        expect(scorecard.history.length).to eq(2)
+      end
     end
   end
 
