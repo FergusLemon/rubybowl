@@ -15,8 +15,10 @@ class Scorecard
       history << frame_score
     elsif finalFrameNoSpecial(frame_score) || finalFrameDoubleStrike(frame_score)
       history << frame_score
+      game_over
     elsif finalFrameSpare(frame_score)
       history << [frame_score[0], 0]
+      game_over
     else finalFrameStrike(frame_score)
       history << frame_score
     end
@@ -52,8 +54,13 @@ class Scorecard
     @game_over = false
   end
 
-  def display_score
-    puts "Thank you for playing Ruby Bowl your score was #{self.calculate_score}."
+  def gameOver
+    final_score = self.calculate_score
+    display_score(final_score)
+  end
+
+  def display_score (final_score)
+    puts "Thank you for playing Ruby Bowl your score was" + final_score + "."
     puts "Would you like to play again?"
     res = gets.chomp
     res == 'yes' ? reset_scorecard : exit
