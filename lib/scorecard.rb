@@ -9,7 +9,7 @@ class Scorecard
     @history = [[0, 0]]
   end
 
-  def record_frame (frame_score)
+  def recordFrame (frame_score)
     if frames129 || finalFrameStrike(frame_score)
       recordScore(frame_score)
     elsif finalFrameNoSpecial(frame_score) || finalFrameDoubleStrike(frame_score)
@@ -21,17 +21,17 @@ class Scorecard
     end
   end
 
-  def calculate_score
+  def calculateScore
     score = history.flatten.reduce(&:+)
-    bonus = self.calculate_bonus(history)
+    bonus = self.calculateBonus(history)
     score + bonus
   end
 
-  def is_spare? (frame_score)
+  def isSpare? (frame_score)
     frame_score.flatten.reduce(&:+) == MAX_SCORE && frame_score != STRIKE
   end
 
-  def calculate_bonus (history)
+  def calculateBonus (history)
     bonus = history.each_with_index.map { |frame, i|
       if frame == STRIKE && history[i + 1] != STRIKE
         history[i + 1]
@@ -51,7 +51,7 @@ class Scorecard
   end
 
   def displayScore
-    puts "Thank you for playing Ruby Bowl your score was #{self.calculate_score}."
+    puts "Thank you for playing Ruby Bowl your score was #{self.calculateScore}."
     puts "Would you like to play again?"
     res = gets.chomp
     if res == 'yes'
@@ -66,11 +66,11 @@ class Scorecard
   end
 
   def finalFrameNoSpecial (frame_score)
-    history.length == 10 && frame_score != STRIKE && !is_spare?(frame_score)
+    history.length == 10 && frame_score != STRIKE && !isSpare?(frame_score)
   end
 
   def finalFrameSpare (frame_score)
-    history.length == 11 && is_spare?(history.last)
+    history.length == 11 && isSpare?(history.last)
   end
 
   def finalFrameStrike (frame_score)
