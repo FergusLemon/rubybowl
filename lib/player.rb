@@ -9,11 +9,11 @@ class Player
 
   def bowl
     number = rand(frame.remaining_pins + 1)
-    frame.record_frame_score(number)
+    frame.recordScore(number)
     number
   end
 
-  def get_score (scorecard)
-    scorecard.calculate_score
+  def getScore (scorecard)
+    scorecard.calculateScore
   end
 end
