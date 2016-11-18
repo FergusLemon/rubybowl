@@ -91,7 +91,6 @@ describe Scorecard do
       it 'end the game after two bonus rolls' do
         10.times do scorecard.record_frame(strike) end
         2.times do scorecard.record_frame(normal_frame) end
-        print scorecard.history
         expect(scorecard.history[1]).to eq(normal_frame)
       end
     end
@@ -99,7 +98,6 @@ describe Scorecard do
     context 'strike in the tenth frame, followed by two strikes' do
       it 'ends the game after the second strike' do
         13.times do scorecard.record_frame(strike) end
-        print scorecard.history
         expect(scorecard.history.length).to eq(2)
       end
     end
