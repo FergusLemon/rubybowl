@@ -1,12 +1,14 @@
 class Scorecard
 
-  attr_reader :history
+  attr_reader :history, :game_over, :player_history
 
   STRIKE = [10, 0]
   MAX_SCORE = 10
 
   def initialize
     @history = [[0, 0]]
+    @game_over = false
+    @player_history = []
   end
 
   def recordFrame (frame_score)
@@ -14,14 +16,16 @@ class Scorecard
       recordScore(frame_score)
     elsif finalFrameNoSpecial(frame_score) || finalFrameDoubleStrike(frame_score)
       recordScore(frame_score)
+      gameOver
     elsif finalFrameSpare(frame_score)
       history << [frame_score[0], 0]
+      gameOver
     else
       history << frame_score
     end
   end
 
-  def calculateScore
+  def calculateScore (history)
     score = history.flatten.reduce(&:+)
     bonus = self.calculateBonus(history)
     score + bonus
@@ -50,13 +54,20 @@ class Scorecard
     @history = [[0, 0]]
   end
 
-  def displayScore
-    puts "Thank you for playing Ruby Bowl your score was #{self.calculateScore}."
+  def gameOver
+    @game_over = true
+    gameOverMessage
+  end
+
+  def gameOverMessage
+    puts "Thank you for playing Ruby Bowl your score was #{self.calculateScore(history)}."
     puts "Would you like to play again?"
     res = gets.chomp
     if res == 'yes'
+      resetScorecard
       puts "Please go right ahead and bowl"
     else
+      puts "Thank you for playing"
       exit
     end
   end
