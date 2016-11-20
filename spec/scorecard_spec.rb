@@ -17,9 +17,8 @@ describe Scorecard do
 
     context 'during the tenth frame' do
       it 'records scores normally where there is no strike or spare' do
-        9.times do scorecard.recordFrame(normal_frame) end
-        scorecard.recordFrame(normal_frame)
-        expect(scorecard.history.last).to eq(normal_frame)
+        10.times do scorecard.recordFrame(normal_frame) end
+        expect(scorecard.history.last).to eq(gutter_ball)
       end
     end
   end
