@@ -64,6 +64,7 @@ class Scorecard
     puts "Would you like to play again?"
     res = gets.chomp
     if res == 'yes'
+      player_history.push(history)
       resetScorecard
       puts "Please go right ahead and bowl"
     else
