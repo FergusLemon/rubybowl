@@ -1,13 +1,12 @@
 class Scorecard
 
-  attr_reader :history, :game_over, :player_history
+  attr_reader :history, :player_history
 
   STRIKE = [10, 0]
   MAX_SCORE = 10
 
   def initialize
     @history = [[0, 0]]
-    @game_over = false
     @player_history = []
   end
 
@@ -55,7 +54,6 @@ class Scorecard
   end
 
   def gameOver
-    @game_over = true
     gameOverMessage
   end
 

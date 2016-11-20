@@ -70,8 +70,8 @@ describe Scorecard do
   describe '#gameOver?' do
     context 'no strike or spare in the tenth frame' do
       it 'ends the game after ten frames' do
-        10.times do scorecard.recordFrame(normal_frame) end
-        expect(scorecard.game_over).to eq(true)
+        11.times do scorecard.recordFrame(normal_frame) end
+        expect(scorecard.history).to eq([gutter_ball, normal_frame])
         #expect(scorecard.recordFrame(normal_frame)).to output('Thank you for playing Ruby Bowl your score was 90.').to_stdout_from_any_process
       end
     end
@@ -79,22 +79,22 @@ describe Scorecard do
     context 'spare in the tenth frame' do
       it 'ends the game after one bonus roll' do
         10.times do scorecard.recordFrame(spare) end
-        expect(scorecard.game_over).to eq(true)
+        expect(scorecard.history).to eq(fresh_scorecard)
       end
     end
 
     context 'strike in the tenth frame, followed by no strike' do
       it 'end the game after two bonus rolls' do
         10.times do scorecard.recordFrame(strike) end
-        scorecard.recordFrame(normal_frame)
-        expect(scorecard.game_over).to eq(true)
+        2.times do scorecard.recordFrame(normal_frame) end
+        expect(scorecard.history).to eq([gutter_ball, normal_frame])
       end
     end
 
     context 'strike in the tenth frame, followed by two strikes' do
       it 'ends the game after the second strike' do
         13.times do scorecard.recordFrame(strike) end
-        expect(scorecard.game_over).to eq(true)
+        expect(scorecard.history).to eq([gutter_ball, strike])
       end
     end
   end
