@@ -11,9 +11,9 @@ class Scorecard
   end
 
   def recordFrame (frame_score)
-    if frames129 || finalFrameStrike(frame_score)
+    if frames129
       recordScore(frame_score)
-    elsif finalFrameNoSpecial(frame_score) || finalFrameDoubleStrike(frame_score)
+    elsif finalFrameNoSpecial(frame_score) || finalFrameDoubleStrike(frame_score) || finalFrameStrikeNormal(frame_score)
       recordScore(frame_score)
       gameOver
     elsif finalFrameSpare(frame_score)
@@ -85,8 +85,8 @@ class Scorecard
     history.length == 11 && isSpare?(history.last)
   end
 
-  def finalFrameStrike (frame_score)
-    history.length == 11 && history.last == STRIKE
+  def finalFrameStrikeNormal (frame_score)
+    history.length == 11 && history.last == STRIKE && frame_score != STRIKE
   end
 
   def finalFrameDoubleStrike (frame_score)
