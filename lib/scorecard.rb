@@ -20,7 +20,7 @@ class Scorecard
       history << [frame_score[0], 0]
       gameOver
     else
-      history << frame_score
+      recordScore(frame_score)
     end
   end
 
