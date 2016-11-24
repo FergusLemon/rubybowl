@@ -91,6 +91,14 @@ describe Scorecard do
       end
     end
 
+    context 'strike in the tenth and eleventh frame, followed by no strike' do
+      it 'takes the first roll and does not allow a second roll' do
+        11.times do scorecard.recordFrame(strike) end
+        scorecard.recordFrame(normal_frame)
+        expect(scorecard.player_history[0].last).to eq([2])
+      end
+    end
+
     context 'strike in the tenth frame, followed by two strikes' do
       it 'ends the game after the second strike' do
         13.times do scorecard.recordFrame(strike) end
