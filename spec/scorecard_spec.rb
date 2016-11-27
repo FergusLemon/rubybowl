@@ -11,7 +11,7 @@ describe Scorecard do
     context 'during the first nine frames' do
       it 'records a frame' do
         scorecard.recordFrame(normal_frame)
-        expect(scorecard.history).to eq([gutter_ball, normal_frame])
+        expect(scorecard.history).to eq([normal_frame])
       end
     end
 
