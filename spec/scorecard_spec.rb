@@ -95,7 +95,6 @@ describe Scorecard do
       it 'takes the first roll and does not allow a second roll' do
         11.times do scorecard.recordFrame(strike) end
         scorecard.recordFrame(normal_frame)
-        print scorecard.player_history
         expect(scorecard.player_history[0].last).to eq([2])
       end
     end
