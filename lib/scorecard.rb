@@ -46,7 +46,7 @@ class Scorecard
       else
         0
       end}
-    bonus[0, 10].flatten.compact.reduce(&:+)
+    bonus[0, 9].flatten.compact.reduce(&:+)
   end
 
   def resetScorecard
