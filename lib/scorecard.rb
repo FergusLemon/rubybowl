@@ -11,7 +11,7 @@ class Scorecard
   end
 
   def recordFrame (frame_score)
-    if frames129
+    if framesOneToNine
       recordScore(frame_score)
     elsif finalFrameNoSpecial(frame_score) || finalFrameDoubleStrike(frame_score)
       recordScore(frame_score)
@@ -73,7 +73,7 @@ class Scorecard
 
   private
 
-  def frames129
+  def framesOneToNine
     history.length < 9
   end
 
