@@ -81,16 +81,20 @@ class Scorecard
     history.length == 9 && frame_score != STRIKE && !isSpare?(frame_score)
   end
 
-  def finalFrameSpare (frame_score)
-    history.length == 10 && isSpare?(history.last)
-  end
-
   def finalFrameStrikeNormal (frame_score)
     history.length == 10 && history.last == STRIKE && frame_score != STRIKE
   end
 
   def finalFrameDoubleStrike (frame_score)
     history.length == 11 && history.last == STRIKE && frame_score == STRIKE
+  end
+
+  def finalFrameSingleStrike (frame_score)
+    history.length == 11 && history.last == STRIKE && frame_score != STRIKE
+  end
+
+  def finalFrameSpare (frame_score)
+    history.length == 10 && isSpare?(history.last)
   end
 
   def recordScore (frame_score)
