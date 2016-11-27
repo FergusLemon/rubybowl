@@ -6,17 +6,17 @@ class Scorecard
   MAX_SCORE = 10
 
   def initialize
-    @history = [[0, 0]]
+    @history = []
     @player_history = []
   end
 
   def recordFrame (frame_score)
     if frames129
       recordScore(frame_score)
-    elsif finalFrameNoSpecial(frame_score) || finalFrameDoubleStrike(frame_score) || finalFrameStrikeNormal(frame_score)
+    elsif finalFrameNoSpecial(frame_score) || finalFrameDoubleStrike(frame_score)
       recordScore(frame_score)
       gameOver
-    elsif finalFrameSpare(frame_score)
+    elsif finalFrameSpare(frame_score) || finalFrameStrikeNormal(frame_score)
       history << [frame_score[0], 0]
       gameOver
     else
@@ -90,7 +90,7 @@ class Scorecard
   end
 
   def finalFrameDoubleStrike (frame_score)
-    history.length == 12 && history.last == STRIKE
+    history.length == 12 && history.last == STRIKE && frame_score == STRIKE
   end
 
   def recordScore (frame_score)
