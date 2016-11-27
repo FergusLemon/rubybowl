@@ -59,9 +59,9 @@ class Scorecard
 
   def gameOverMessage
     puts "Thank you for playing Ruby Bowl your score was #{self.calculateScore(history)}."
-    puts "Would you like to play again?"
+    puts "Would you like to play again? y/n"
     res = gets.chomp
-    if res == 'yes'
+    if res == 'y'
       player_history.push(history)
       resetScorecard
       puts "Please go right ahead and bowl"
