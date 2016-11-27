@@ -74,23 +74,23 @@ class Scorecard
   private
 
   def frames129
-    history.length < 10
+    history.length < 9
   end
 
   def finalFrameNoSpecial (frame_score)
-    history.length == 10 && frame_score != STRIKE && !isSpare?(frame_score)
+    history.length == 9 && frame_score != STRIKE && !isSpare?(frame_score)
   end
 
   def finalFrameSpare (frame_score)
-    history.length == 11 && isSpare?(history.last)
+    history.length == 10 && isSpare?(history.last)
   end
 
   def finalFrameStrikeNormal (frame_score)
-    history.length == 11 && history.last == STRIKE && frame_score != STRIKE
+    history.length == 10 && history.last == STRIKE && frame_score != STRIKE
   end
 
   def finalFrameDoubleStrike (frame_score)
-    history.length == 12 && history.last == STRIKE && frame_score == STRIKE
+    history.length == 11 && history.last == STRIKE && frame_score == STRIKE
   end
 
   def recordScore (frame_score)

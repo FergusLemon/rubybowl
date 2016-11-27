@@ -5,7 +5,7 @@ describe Scorecard do
   let(:spare) { [5, 5] }
   let(:strike) { [10, 0] }
   let(:gutter_ball) { [0, 0] }
-  let(:fresh_scorecard) { [[0, 0]] }
+  let(:fresh_scorecard) { [] }
 
   describe '#recordFrame' do
     context 'during the first nine frames' do
