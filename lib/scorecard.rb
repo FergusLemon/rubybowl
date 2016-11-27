@@ -13,11 +13,11 @@ class Scorecard
   def recordFrame (frame_score)
     if framesOneToNine
       recordScore(frame_score)
-    elsif finalFrameNoSpecial(frame_score) || finalFrameDoubleStrike(frame_score)
+    elsif finalFrameNoSpecial(frame_score) || finalFrameDoubleStrike(frame_score) || finalFrameStrikeNormal(frame_score)
       recordScore(frame_score)
       gameOver
-    elsif finalFrameSpare(frame_score) || finalFrameStrikeNormal(frame_score)
-      history << [frame_score[0], 0]
+    elsif finalFrameSpare(frame_score) || finalFrameSingleStrike(frame_score)
+      history << [frame_score[0]]
       gameOver
     else
       recordScore(frame_score)
